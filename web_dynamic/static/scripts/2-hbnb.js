@@ -1,4 +1,5 @@
 #!/usr/bin/node
+const api_URL = 'http://' + window.location.hostname + ':5001/';
 window.onload = function () {
   // Create empty object to store amenities
   const checkedAmenities = {};
@@ -18,3 +19,10 @@ window.onload = function () {
     $('.amenities h4').text(amenitiyList).css({ width: '220px', height: '16px', overflow: 'hidden', 'text-overflow': 'ellipsis', 'white-space': 'nowrap' });
   });
 };
+$.get(api_URL + 'api/v1/status/', function (data) {
+  if (data.status === 'OK') {
+    $('#api_status').addClass('available');
+  } else {
+    $('#api_status').removeClass('available');
+  }
+});
